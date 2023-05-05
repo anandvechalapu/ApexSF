@@ -1,0 +1,108 @@
+> answers = questionResponses.where(q.Id == DRL_Question__c);
+            // Get users who answered this question
+            List<DRL_User_Response__c> users = userResponses.where(q.Id == DRL_Question__c);
+            
+            // Calculate the response rate
+            Integer responseRate = (users.size() / responseUsers.size()) * 100;
+            
+            // Calculate the average answer
+            Double averageAnswer = 0;
+            for(DRL_Question_Response__c a : answers){
+                averageAnswer += a.Answer_Value__c;
+            }
+            averageAnswer = averageAnswer / answers.size();
+            
+            // Create report
+            DRL_Survey_Report__c report = new DRL_Survey_Report__c();
+            report.DRL_Survey__c = survey.Id;
+            report.DRL_Question__c = q.Id;
+            report.Response_Rate__c = responseRate;
+            report.Average_Answer__c = averageAnswer;
+            insert report;
+        }
+    }
+}
+
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Domain__c</fullName>
+        <externalId>false</externalId>
+        <label>Domain</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Title</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Delay_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Delay Time</label>
+        <required>true</required>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Survey_State__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey State</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Page_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Page Name</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>true</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>true</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Target_Users__c</fullName>
+        <externalId>false</externalId>
+        <label>Target Users</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Criteria__c</fullName>
+        <externalId>false</externalId>
+        <label>Criteria</label>
+        <length>255</length>
